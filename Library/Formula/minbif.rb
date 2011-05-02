@@ -1,6 +1,6 @@
 require 'formula'
 
-class Minbif <Formula
+class Minbif < Formula
   url 'http://minbif.im/attachments/download/50/minbif-1.0.3.tar.gz'
   homepage 'http://minbif.im/'
   md5 'c08add6234a6dd4a45b46b590fa63268'
@@ -18,8 +18,8 @@ class Minbif <Formula
       s.gsub! "motd = /etc", "motd = #{etc}"
     end
 
-    system "make"
-    system "make install"
+    system "make", "PREFIX=#{prefix}"
+    system "make", "PREFIX=#{prefix}", "install"
 
     (var + "lib/minbif/users").mkpath
   end

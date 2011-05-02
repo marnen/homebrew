@@ -9,7 +9,7 @@ require 'formula'
 # "brew link" them afterwards:
 # * gdbm
 
-class GnuSmalltalk <Formula
+class GnuSmalltalk < Formula
   url 'ftp://ftp.gnu.org/gnu/smalltalk/smalltalk-3.2.2.tar.gz'
   homepage 'http://smalltalk.gnu.org/'
   sha1 'a985d69e4760420614c9dfe4d3605e47c5eb8faa'
@@ -17,13 +17,15 @@ class GnuSmalltalk <Formula
   # 'gmp' is an optional dep, it is built 64-bit on Snow Leopard
   # (and this brew is forced to build in 32-bit mode.)
 
-  def install
-    fails_with_llvm "Codegen problems with LLVM"
+  depends_on 'readline'
 
+  fails_with_llvm "Codegen problems with LLVM"
+
+  def install
     # 64-bit version doesn't build, so force 32 bits.
     ENV.m32
 
-    if snow_leopard_64? and Formula.factory('gdbm').installed?
+    if MacOS.prefer_64_bit? and Formula.factory('gdbm').installed?
       onoe "A 64-bit gdbm will cause linker errors"
       puts <<-EOS.undent
         GNU Smalltak doesn't compile 64-bit clean on OS X, so having a
@@ -34,6 +36,8 @@ class GnuSmalltalk <Formula
       EOS
     end
 
+    readline = Formula.factory('readline')
+
     # GNU Smalltalk thinks it needs GNU awk, but it works fine
     # with OS X awk, so let's trick configure.
     here = Dir.pwd
@@ -43,7 +47,7 @@ class GnuSmalltalk <Formula
     ENV['FFI_CFLAGS'] = '-I/usr/include/ffi'
     system "./configure", "--disable-debug", "--disable-dependency-tracking",
                           "--prefix=#{prefix}",
-                          "--with-readline=/usr/lib"
+                          "--with-readline=#{readline.lib}"
     system "make"
     ENV.j1 # Parallel install doesn't work
     system "make install"
