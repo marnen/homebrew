@@ -10,6 +10,7 @@ class Gobby < Formula
   depends_on 'gtkmm'
   depends_on 'libxml++'
   depends_on 'gtksourceview'
+  depends_on 'obby'
 
   def install
     system "./configure", "--disable-debug", "--disable-dependency-tracking",
