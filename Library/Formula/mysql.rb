@@ -25,6 +25,9 @@ class Mysql < Formula
   def patches; DATA; end
 
   def install
+    # Make sure the var/msql directory exists
+    (var+"mysql").mkpath
+
     args = [".",
             "-DCMAKE_INSTALL_PREFIX=#{prefix}",
             "-DMYSQL_DATADIR=#{var}/mysql",
@@ -91,6 +94,8 @@ class Mysql < Formula
 
     Start mysqld manually with:
         mysql.server start
+
+        Note: if this fails, you probably forgot to run the first two steps up above
 
     A "/etc/my.cnf" from another install may interfere with a Homebrew-built
     server starting up correctly.
