@@ -1,8 +1,8 @@
 require 'formula'
 
-class Gobby <Formula
+class Gobby < Formula
   url 'git://git.0x539.de/git/gobby.git'
-  homepage ''
+  homepage 'http://gobby.0x539.de'
   md5 ''
 
   # depends_on 'cmake'
