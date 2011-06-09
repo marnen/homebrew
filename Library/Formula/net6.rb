@@ -6,6 +6,8 @@ class Net6 < Formula
   md5 '506776416d8aea2b9ea13a81f9145383'
   
   depends_on 'pkg-config'
+  depends_on 'gnutls'
+  depends_on 'libsigc++'
 
   def install
     system "./configure", "--disable-debug", "--disable-dependency-tracking",
