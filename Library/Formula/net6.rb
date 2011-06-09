@@ -1,12 +1,11 @@
 require 'formula'
 
-class Obby < Formula
-  url 'http://releases.0x539.de/obby/obby-0.4.7.tar.gz'
+class Net6 < Formula
+  url 'http://releases.0x539.de/net6/net6-1.3.12.tar.gz'
   homepage 'http://gobby.0x539.de'
-  md5 '33fac4228c1efc1a1635bacf6480dc31'
-
+  md5 '506776416d8aea2b9ea13a81f9145383'
+  
   depends_on 'pkg-config'
-  depends_on 'net6'
 
   def install
     system "./configure", "--disable-debug", "--disable-dependency-tracking",
