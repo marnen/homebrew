@@ -12,6 +12,7 @@ class Gobby < Formula
   depends_on 'gtksourceview'
   depends_on 'obby'
   depends_on 'gettext'
+  depends_on 'hicolor-icon-theme'
 
   def install
     ENV.x11
