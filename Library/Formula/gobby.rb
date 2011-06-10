@@ -14,6 +14,7 @@ class Gobby < Formula
   depends_on 'gettext'
 
   def install
+    ENV.x11
     system "./configure", "--disable-debug", "--disable-dependency-tracking",
                           "--prefix=#{prefix}"
     system "make install"
