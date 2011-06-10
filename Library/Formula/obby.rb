@@ -5,7 +5,7 @@ class Obby < Formula
   homepage 'http://gobby.0x539.de'
   md5 '33fac4228c1efc1a1635bacf6480dc31'
 
-  depends_on 'pkg-config'
+  depends_on 'pkg-config' => :build
   depends_on 'net6'
 
   def install
