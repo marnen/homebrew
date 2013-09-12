@@ -9,19 +9,17 @@ class PythonPopplerQt4 < Formula
   url 'https://python-poppler-qt4.googlecode.com/files/python-poppler-qt4-0.16.3.tar.gz'
   sha1 'fe6aa650a1a917caeedd407ae0c428a5de9eefb8'
 
-  # depends_on 'cmake' => :build
-  depends_on :x11 # if your formula requires any X11/XQuartz components
+  depends_on :python2 => '2.6'
+  depends_on 'sip'
+  depends_on 'poppler' => 'with-qt4'
+  depends_on 'qt'
+  depends_on 'pyqt'
 
   def install
-    # ENV.j1  # if your formula's build system can't parallelize
-
-    # Remove unrecognized options if warned by configure
-    system "./configure", "--disable-debug",
-                          "--disable-dependency-tracking",
-                          "--disable-silent-rules",
-                          "--prefix=#{prefix}"
-    # system "cmake", ".", *std_cmake_args
-    system "make", "install" # if this fails, try separate make/make install steps
+    python do
+      system python, "setup.py", "build"
+      system python, "setup.py", "install", "--prefix=#{prefix}"
+    end
   end
 
   test do
