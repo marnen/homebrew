@@ -17,8 +17,9 @@ class PythonPopplerQt4 < Formula
 
   def install
     python do
+      append_path 'PATH', File.join(HOMEBREW_PREFIX, 'bin')
       system python, "setup.py", "build"
-      system python, "setup.py", "install", "--prefix=#{prefix}"
+      system python, "setup.py", "install", "--prefix=#{prefix}", "--single-version-externally-managed", "--record=installed.txt"
     end
   end
 
@@ -29,5 +30,23 @@ class PythonPopplerQt4 < Formula
     # "false" with the main program this formula installs, but it'd be nice if you
     # were more thorough. Run the test with `brew test python-poppler-qt4`.
     system "false"
+  end
+
+  private
+
+  def append_path(env, path)
+    ENV[env] = [ENV[env], path].compact.join ':'
+  end
+
+  def poppler_prefix
+    Formula.factory('poppler').opt_prefix
+  end
+
+  def poppler_include_path
+    File.join poppler_prefix, 'include', 'poppler'
+  end
+
+  def poppler_pkg_config_path
+    File.join poppler_prefix, 'lib', 'pkgconfig'
   end
 end
