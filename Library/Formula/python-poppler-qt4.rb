@@ -1,9 +1,5 @@
 require 'formula'
 
-# Documentation: https://github.com/mxcl/homebrew/wiki/Formula-Cookbook
-#                /usr/local/Library/Contributions/example-formula.rb
-# PLEASE REMOVE ALL GENERATED COMMENTS BEFORE SUBMITTING YOUR PULL REQUEST!
-
 class PythonPopplerQt4 < Formula
   homepage 'https://code.google.com/p/python-poppler-qt4/'
   url 'https://python-poppler-qt4.googlecode.com/files/python-poppler-qt4-0.16.3.tar.gz'
