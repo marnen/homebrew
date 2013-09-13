@@ -34,19 +34,7 @@ class PythonPopplerQt4 < Formula
 
   private
 
-  def append_path(env, path)
-    ENV[env] = [ENV[env], path].compact.join ':'
-  end
-
-  def poppler_prefix
-    Formula.factory('poppler').opt_prefix
-  end
-
-  def poppler_include_path
-    File.join poppler_prefix, 'include', 'poppler'
-  end
-
-  def poppler_pkg_config_path
-    File.join poppler_prefix, 'lib', 'pkgconfig'
+  def append_path(path)
+    ENV['PATH'] = [ENV['PATH'], path].compact.join ':'
   end
 end
