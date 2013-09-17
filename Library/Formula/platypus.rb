@@ -10,16 +10,21 @@ class Platypus < Formula
 
   def install
     cd 'Platypus 4.8 Source' do
-      system "xcodebuild", "SYMROOT=build",
+      system "xcodebuild", "SYMROOT=build", "DSTROOT=#{buildpath}",
                            "-project", "Platypus.xcodeproj",
                            "-target", "platypus",
                            "-target", "ScriptExec",
                            "clean", "install"
       man1.install "CommandLineTool/platypus.1"
     end
-    bin.install build_dir/'platypus_clt' => 'platypus'
-    app_share.install contents/'Resources/MainMenu.nib'
-    app_share.install contents/'MacOS/ScriptExec'
+
+    cd buildpath do
+      bin.install 'platypus_clt' => 'platypus'
+      cd 'ScriptExec.app/Contents' do
+        app_share.install 'Resources/MainMenu.nib'
+        app_share.install 'MacOS/ScriptExec'
+      end
+    end
   end
 
   def test
@@ -35,15 +40,7 @@ class Platypus < Formula
 
   private
 
-  def build_dir
-    Pathname.new '/tmp/Platypus.dst'
-  end
-
   def app_share
     share/'platypus'
-  end
-
-  def contents
-    build_dir/'ScriptExec.app/Contents'
   end
 end
