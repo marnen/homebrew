@@ -27,7 +27,7 @@ class Platypus < Formula
   end
 
   def caveats
-    s = <<-EOS.undent
+    <<-EOS.undent
       This formula only installs the command-line Platypus tool, not the GUI.
       If you want the GUI, download the app from the project's Web page directly.
     EOS
@@ -40,7 +40,7 @@ class Platypus < Formula
   end
 
   def app_share
-    (share/'platypus')
+    share/'platypus'
   end
 
   def contents
