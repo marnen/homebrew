@@ -18,12 +18,10 @@ class Platypus < Formula
       man1.install "CommandLineTool/platypus.1"
     end
 
-    cd buildpath do
-      bin.install 'platypus_clt' => 'platypus'
-      cd 'ScriptExec.app/Contents' do
-        app_share.install 'Resources/MainMenu.nib'
-        app_share.install 'MacOS/ScriptExec'
-      end
+    bin.install 'platypus_clt' => 'platypus'
+    cd 'ScriptExec.app/Contents' do
+      app_share.install 'Resources/MainMenu.nib'
+      app_share.install 'MacOS/ScriptExec'
     end
   end
 
