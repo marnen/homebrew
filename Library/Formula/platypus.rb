@@ -9,7 +9,7 @@ class Platypus < Formula
   depends_on :xcode
 
   def install
-    Dir.chdir 'Platypus 4.8 Source' do
+    cd 'Platypus 4.8 Source' do
       system "xcodebuild", "SYMROOT=build",
                            "-project", "Platypus.xcodeproj",
                            "-target", "platypus",
