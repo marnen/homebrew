@@ -23,4 +23,11 @@ class Platypus < Formula
   def test
     system "#{bin}/platypus", "-v"
   end
+
+  def caveats
+    s = <<-EOS.undent
+      This formula only installs the command-line Platypus tool, not the GUI.
+      If you want the GUI, download the app from the project's Web page directly.
+    EOS
+  end
 end
