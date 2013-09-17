@@ -20,8 +20,7 @@ class Platypus < Formula
 
     bin.install 'platypus_clt' => 'platypus'
     cd 'ScriptExec.app/Contents' do
-      app_share.install 'Resources/MainMenu.nib'
-      app_share.install 'MacOS/ScriptExec'
+      (share/'platypus').install 'Resources/MainMenu.nib', 'MacOS/ScriptExec'
     end
   end
 
@@ -34,11 +33,5 @@ class Platypus < Formula
       This formula only installs the command-line Platypus tool, not the GUI.
       If you want the GUI, download the app from the project's Web page directly.
     EOS
-  end
-
-  private
-
-  def app_share
-    share/'platypus'
   end
 end
