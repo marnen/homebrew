@@ -11,6 +11,7 @@ require 'compilers'
 require 'build_environment'
 require 'build_options'
 require 'formulary'
+require 'software_spec'
 
 
 class Formula
@@ -48,7 +49,7 @@ class Formula
 
     @active_spec = determine_active_spec
     validate_attributes :url, :name, :version
-    @downloader = download_strategy.new(name, active_spec)
+    @downloader = active_spec.download_strategy.new(name, active_spec)
 
     # Combine DSL `option` and `def options`
     options.each do |opt, desc|
@@ -179,10 +180,6 @@ class Formula
 
   def opt_prefix
     Pathname.new("#{HOMEBREW_PREFIX}/opt/#{name}")
-  end
-
-  def download_strategy
-    active_spec.download_strategy
   end
 
   def cached_download
@@ -614,7 +611,7 @@ class Formula
 
   def stage
     fetched = fetch
-    verify_download_integrity(fetched) if fetched.file?
+    verify_download_integrity(fetched) if fetched.respond_to?(:file?) and fetched.file?
     mktemp do
       downloader.stage
       # Set path after the downloader changes the working folder.
@@ -679,7 +676,8 @@ class Formula
 
     def stable &block
       return @stable unless block_given?
-      instance_eval(&block)
+      @stable ||= SoftwareSpec.new
+      @stable.instance_eval(&block)
     end
 
     def bottle *, &block
@@ -694,10 +692,16 @@ class Formula
       @devel.instance_eval(&block)
     end
 
-    def head val=nil, specs={}
-      return @head if val.nil?
-      @head ||= HeadSoftwareSpec.new
-      @head.url(val, specs)
+    def head val=nil, specs={}, &block
+      if block_given?
+        @head ||= HeadSoftwareSpec.new
+        @head.instance_eval(&block)
+      elsif val
+        @head ||= HeadSoftwareSpec.new
+        @head.url(val, specs)
+      else
+        @head
+      end
     end
 
     def version val=nil
