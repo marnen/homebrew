@@ -13,10 +13,13 @@ class Platypus < Formula
       system "xcodebuild", "SYMROOT=build",
                            "-project", "Platypus.xcodeproj",
                            "-target", "platypus",
+                           "-target", "ScriptExec",
                            "clean", "install"
       man1.install "CommandLineTool/platypus.1"
-      bin.install "/tmp/Platypus.dst/platypus_clt" => "platypus"
     end
+    bin.install build_dir/'platypus_clt' => 'platypus'
+    app_share.install contents/'Resources/MainMenu.nib'
+    app_share.install contents/'MacOS/ScriptExec'
   end
 
   def test
@@ -28,5 +31,19 @@ class Platypus < Formula
       This formula only installs the command-line Platypus tool, not the GUI.
       If you want the GUI, download the app from the project's Web page directly.
     EOS
+  end
+
+  private
+
+  def build_dir
+    Pathname.new '/tmp/Platypus.dst'
+  end
+
+  def app_share
+    (share/'platypus')
+  end
+
+  def contents
+    build_dir/'ScriptExec.app/Contents'
   end
 end
