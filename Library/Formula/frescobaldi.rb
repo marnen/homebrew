@@ -11,7 +11,6 @@ class Frescobaldi < Formula
   depends_on :python
   depends_on "portmidi" => :recommended
   depends_on "lilypond" => :recommended
-  depends_on "platypus" => :build if build.with? "launcher"
 
   # python-poppler-qt4 dependencies
   depends_on "poppler" => "with-qt4"
