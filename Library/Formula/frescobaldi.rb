@@ -35,7 +35,7 @@ class Frescobaldi < Formula
     end
     system "python", "setup.py", "install", "--prefix=#{prefix}"
     if build.with? "launcher"
-      system 'python', 'macosx/mac-app.py', '--force', '--version',  version, '--script', prefix/'frescobaldi'
+      system 'python', 'macosx/mac-app.py', '--force', '--version',  version, '--script', bin/'frescobaldi'
       prefix.install 'dist/Frescobaldi.app'
     end
   end
