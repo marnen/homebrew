@@ -29,7 +29,17 @@ class Frescobaldi < Formula
     end
     system "python", "setup.py", "install", "--prefix=#{prefix}"
     if build.with? "launcher"
-      # TODO
+      system 'python', 'macosx/mac-app.py', '--force', '--version',  version, '--script', bin/'frescobaldi'
+      bin.install 'dist/Frescobaldi.app'
     end
+  end
+
+  def caveats
+    <<-EOS.undent if build.with? 'launcher'
+      To install the Mac OS X launcher application run:
+        brew linkapps (to install in ~/Applications)
+      or:
+        ln -s #{bin}/Frescobaldi.app /Applications
+    EOS
   end
 end
