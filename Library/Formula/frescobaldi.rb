@@ -29,8 +29,7 @@ class Frescobaldi < Formula
     end
     system "python", "setup.py", "install", "--prefix=#{prefix}"
     if build.with? "launcher"
-      system "platypus", "-aFrescobaldi", "-oNone",
-             bin/"frescobaldi", bin/"Frescobaldi.app"
+      # TODO
     end
   end
 end
