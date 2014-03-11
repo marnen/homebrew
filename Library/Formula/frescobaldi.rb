@@ -18,8 +18,8 @@ class Frescobaldi < Formula
   depends_on "pkg-config" => :build
 
   resource "python-poppler-qt4" do
-    url "https://python-poppler-qt4.googlecode.com/files/python-poppler-qt4-0.16.3.tar.gz"
-    sha1 "fe6aa650a1a917caeedd407ae0c428a5de9eefb8"
+    url "https://github.com/wbsoft/python-poppler-qt4/archive/v0.18.1.tar.gz"
+    sha1 "584345ae2fae2e1d667222cafa404a241cf95a1f"
   end
 
   def install
