@@ -22,6 +22,12 @@ class Frescobaldi < Formula
     sha1 "584345ae2fae2e1d667222cafa404a241cf95a1f"
   end
 
+  def patches
+    # Add my name to the credits as Homebrew formula maintainer.
+    # Remove if https://github.com/wbsoft/frescobaldi/pull/391 is accepted.
+    'https://github.com/wbsoft/frescobaldi/pull/391.patch'
+  end
+
   def install
     resource("python-poppler-qt4").stage do
       system "python", "setup.py", "build"
