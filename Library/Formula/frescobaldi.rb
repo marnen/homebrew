@@ -2,8 +2,8 @@ require "formula"
 
 class Frescobaldi < Formula
   homepage "http://frescobaldi.org/"
-  url "https://github.com/wbsoft/frescobaldi/releases/download/v2.0.14/frescobaldi-2.0.14.tar.gz"
-  sha1 "14d2cbbf80f2094194d6469ca073884c811a7dd4"
+  url "https://github.com/wbsoft/frescobaldi/releases/download/v2.0.15/frescobaldi-2.0.15.tar.gz"
+  sha1 "e110ca2be338ca4fb9a0369c6f733dbdf731a027"
 
   option "without-launcher", "Don't build Mac .app launcher"
   option "without-lilypond", "Don't install Lilypond"
