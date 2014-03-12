@@ -25,7 +25,7 @@ class Frescobaldi < Formula
   def patches
     # Add my name to the credits as Homebrew formula maintainer.
     # Remove if https://github.com/wbsoft/frescobaldi/pull/391 is accepted.
-    'https://github.com/wbsoft/frescobaldi/pull/391.patch'
+    'https://github.com/wbsoft/frescobaldi/commit/0cce03.patch'
   end
 
   def install
